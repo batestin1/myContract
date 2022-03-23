@@ -7,9 +7,18 @@
 
 import mysql.connector
 from sqlalchemy import create_engine
-import json
 import pandas as pd
-import random
+secret = open("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/secrets/secrets.txt", 'r')
+secret = list(secret)
+#variaveis
+
+path = secret[0]
+path = path.replace("\n", "")
+nome_empresa = secret[4]
+nomecurto = nome_empresa.replace(" ","")
+
+
+
 
 
 #configs
@@ -24,12 +33,12 @@ banco = mysql.connector.connect(
 cursor = banco.cursor()
 
 cursor = banco.cursor()
-cursor.execute('CREATE DATABASE IF NOT EXISTS <nomedasuaempresa>')
-my_conn = create_engine('mysql+mysqldb://root:@localhost/<nomedasuaempresa>')
+cursor.execute(f'CREATE DATABASE IF NOT EXISTS {nomecurto}')
+my_conn = create_engine(f'mysql+mysqldb://root:@localhost/{nomecurto}')
 
 ### read jsons ### 
 
-data = pd.read_csv("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/download/<nomedasuaempresa> - Formulario.csv", header='infer', index_col= False) 
+data = pd.read_csv(f"{path}download/dados_contrato.csv", header='infer', index_col= False) 
 data.to_sql(con=my_conn, name='clients', if_exists='append', index=False)
 print("Carregado com sucesso!")
 

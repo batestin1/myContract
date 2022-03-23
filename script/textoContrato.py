@@ -1,10 +1,42 @@
 
 #############################################################################################################################
-#   filename:dadosEvento.py                                                       
+#   filename:textoContrato.py                                                       
 #   created: 2022-03-14                                                              
 #   import your librarys below                                                    
 #############################################################################################################################
 from get_dados import Dados
+# import our secrets
+secret = open("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/secrets/secrets.txt", 'r')
+secret = list(secret)
+#variaveis
+
+path = secret[0]
+path = path.replace("\n", "")
+pix = secret[1]
+pix = pix.replace("\n", "")
+banco = secret[2]
+banco = banco.replace("\n", "")
+favorecido = secret[3]
+favorecido = favorecido.replace("\n", "")
+nome_empresa = secret[4]
+nome_empresa = nome_empresa.replace("\n", "")
+end_empresa = secret[5]
+end_empresa = end_empresa.replace("\n", "")
+num_empresa = secret[6]
+num_empresa = num_empresa.replace("\n", "")
+cep_empresa = secret[8]
+cep_empresa = cep_empresa.replace("\n", "")
+bairro_empresa = secret[7]
+bairro_empresa = bairro_empresa.replace("\n", "")
+estado_empresa = secret[9]
+estado_empresa = estado_empresa.replace("\n", "")
+cnpj = secret[10]
+cnpj = cnpj.replace("\n", "")
+email_empresa = secret[11]
+email_empresa = email_empresa.replace("\n", "")
+senha_empresa = secret[12]
+senha_empresa = senha_empresa .replace("\n", "")
+
 
 class Texto():
     def __init__(self) -> None:
@@ -12,7 +44,7 @@ class Texto():
         dados = Dados()
 
         titulo = "Contrato de Prestação de Serviço de Fotografia"
-        subtitulo = "<nome do studio>"
+        subtitulo = f"{nome_empresa.upper()}"
 
 
         clausura12 = dados.textoValor
@@ -20,14 +52,14 @@ class Texto():
         #variaveis do contrato
         contratanteT = "Contratante"
         contratadoT = "Contratado"
-        contratado = f"<nome do studio>, com sede <endereco do studio> / e sede na <endereco do studio>, nº<numero>, Bairro<bairro do studio>, CEP <cep>, no Estado de <estado>  inscrita no CNPJ sob o nº <CNPJ>."
+        contratado = f"{nome_empresa.upper()}, com sede {end_empresa.upper()}, nº{num_empresa}, Bairro {bairro_empresa.upper()}, CEP {cep_empresa}, no Estado de {estado_empresa.upper()}  inscrita no CNPJ sob o nº {cnpj}."
         contratante = f"Eu {dados.nome} inscrita(o) no cpf {dados.cpf}, nascida(o) {dados.niver}, residente na {dados.endereco}, {dados.num}, complemento {dados.complemento}, localizado no bairro {dados.bairro}, na cidade {dados.cidade}, e no estado {dados.uf}."
         partes = f"""As partes identificadas acima têm, entre si, justo e acertado o presente Contrato de Prestação de Serviços para Foto {dados.tipo} 
         a ser realizado no(a) {dados.nomeEspaco} cujo endereco consta como {dados.enderecoEvento}, número {dados.bairroEvento}, complemento {dados.complementoEvento} localizado no bairro {dados.bairroEvento}, na cidade {dados.cidadeEvento} do estado {dados.ufEvento}.
 
         A data do evento será realizada no {dados.dataEvento} às {dados.horario} possuindo uma carga total de trabalho de {dados.totalHoras}.
         Explicitado tais informações, o contrato se regerá pelas cláusulas seguintes e pelas condições de preço, forma e termo de pagamento descritas no presente."""
-        equipe = f"A equipe do CONTRATANTE prestará os serviços com <quantidade de fotografos> fotógrafos e <quantidade de assistente> assistente de equipamentos."
+        equipe = f"A equipe do CONTRATANTE prestará os serviços com 1 fotógrafos e 1 assistente de equipamentos."
         clausura2 = f"""Cláusula 2ª. O CONTRATANTE deverá fornecer ao CONTRATADO todas as informações necessárias à realização do serviço, devendo ser verídicas desde o momento pré-contrato à realização do orçamento, especificando os detalhes necessários à perfeita consecução do mesmo, e a forma de como ele deve ser entregue como: nome legível e identificação das pessoas de destaque; livre acesso da equipe ao local do evento; verificar a existência de pontos de energia (tomadas 110v) para os equipamentos, alimentação no buffet, taxa de estacionamento e qualquer eventualidade que por fim altere de alguma forma o valor do orçamento estabelecido. Paragrafo Único: O contratante reserva-se no direito de informar ao contratado o endereço e data de seu evento com uma tolerância de 05 meses após assinatura de contrato, caso ultrapasse esse período fica o contratante ciente de que o <nome do studio> poderá readequar uma outra equipe para o atendimento.
         """
         clausura3 = f"Cláusula 3ª.  É de responsabilidade do CONTRATANTE, eventuais danos físicos causados aos equipamentos ou membros da equipe por parte de seus convidados e por equipe de apoio do evento."

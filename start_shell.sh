@@ -1,13 +1,17 @@
 #bin/bash
 
-#rm -r download
-#mkdir download
-cd pip
-pip install -r requisitos.txt
-cd ../download
+
+#############################################################################################################################
+#   filename:start_shell.sh                                                      
+#   created: 2022-03-14                                                              
+#   import your librarys below                                                    
+#############################################################################################################################
+
 #
-wget https://docs.google.com/forms/u/0/d/1GsnncbrNR91zyfih1W77NJETgQJGk5KPCxFhYHbtdGk/downloadresponses?tz_offset=-10800000&sort_by_timestamp=true
+cd download
 unzip *.zip
+cd ../pip
+pip install -r requisitos.txt
 cd ../script
 clear
 echo "#########################################################################################################################################################################################################"

@@ -1,14 +1,45 @@
 
 #############################################################################################################################
-#   filename:dadosContrante.py                                                       
+#   filename:get_dados.py                                                       
 #   created: 2022-03-14                                                              
 #   import your librarys below                                                    
 #############################################################################################################################
 
 import requests
 import pandas as pd
-import json
-data = pd.read_csv("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/download/<nomedasuaempresa> - Formulario.csv", header='infer', index_col= False)
+
+secret = open("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/secrets/secrets.txt", 'r')
+secret = list(secret)
+#variaveis
+
+path = secret[0]
+path = path.replace("\n", "")
+pix = secret[1]
+pix = pix.replace("\n", "")
+banco = secret[2]
+banco = banco.replace("\n", "")
+favorecido = secret[3]
+favorecido = favorecido.replace("\n", "")
+nome_empresa = secret[4]
+nome_empresa = nome_empresa.replace("\n", "")
+end_empresa = secret[5]
+end_empresa = end_empresa.replace("\n", "")
+num_empresa = secret[6]
+num_empresa = num_empresa.replace("\n", "")
+cep_empresa = secret[7]
+cep_empresa = cep_empresa.replace("\n", "")
+bairro_empresa = secret[8]
+bairro_empresa = bairro_empresa.replace("\n", "")
+estado_empresa = secret[9]
+estado_empresa = estado_empresa.replace("\n", "")
+cnpj = secret[10]
+cnpj = cnpj.replace("\n", "")
+email_empresa = secret[11]
+email_empresa = email_empresa.replace("\n", "")
+senha_empresa = secret[12]
+senha_empresa = senha_empresa .replace("\n", "")
+
+data = pd.read_csv(f"{path}download/dados_contrato.csv", header='infer', index_col= False)
 
 class Dados():
     def __init__(self) -> None:
@@ -17,6 +48,8 @@ class Dados():
             self.email = data['EMAIL DO CONTRATANTE'][i].lower()
             self.tel = data['TELEFONE DO CONTRATANTE'][i]
             self.cpf = data['CPF DO CONTRANTANTE'][i]
+            self.cpf = str(self.cpf)
+            self.cpf = self.cpf.zfill(11)
             self.niver = data['DATA DE NASCIMENTO'][i]
             cep = data['CEP DO CONTRATANTE'][i]
             cep = str(cep)
@@ -65,7 +98,7 @@ class Dados():
             valorEntrada = data['VALOR ENTRADA'][i]
             self.valorEntrada = float(valorEntrada)
             if self.formaPagamento == "À VISTA":
-                self.textoValor = f"""O presente serviço será remunerado pela quantia de R$:{self.valorAcordo}, referente aos serviços efetivamente prestados, devendo ser pago na seguinte condição: {self.formaPagamento}. O pagamento só poderá ser aceito por transferência, e PIX para o seguinte endereço eletrônico: PIX: <pix> banco <banco> favorecido: <favorecido>."""
+                self.textoValor = f"""O presente serviço será remunerado pela quantia de R$:{self.valorAcordo}, referente aos serviços efetivamente prestados, devendo ser pago na seguinte condição: {self.formaPagamento}. O pagamento só poderá ser aceito por transferência, e PIX para o seguinte endereço eletrônico: PIX: {pix} banco {banco} favorecido: {favorecido}."""
             else:
-                self.textoValor = f"""O presente serviço será remunerado pela quantia de R$:{self.valorAcordo}, referente aos serviços efetivamente prestados, devendo ser pago na seguinte condição: {self.formaPagamento}. Acertado esta condição, segue demais critérios: o valor total de parcelas R$:{self.valorParcela} com total de {self.totalParcelas} parcelas, sendo da qual, uma quitação de entrada no valor de R$:{self.valorEntrada}."""
+                self.textoValor = f"""O presente serviço será remunerado pela quantia de R$:{self.valorAcordo}, referente aos serviços efetivamente prestados, devendo ser pago na seguinte condição: {self.formaPagamento}. Acertado esta condição, segue demais critérios: o valor total de parcelas R$:{self.valorParcela} com total de {self.totalParcelas} parcelas, sendo da qual, uma quitação de entrada no valor de R$:{self.valorEntrada}. O pagamento será efetuado  por transferência, e PIX para o seguinte endereço eletrônico: PIX: {pix} banco {banco} favorecido: {favorecido} a partir do dia 15 de cada mes subjacente."""
 

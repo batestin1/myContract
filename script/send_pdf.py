@@ -1,18 +1,21 @@
 
 #############################################################################################################################
-#   filename:dadosContrante.py                                                       
+#   filename:send_pdf.py                                                       
 #   created: 2022-03-14                                                              
 #   import your librarys below                                                    
 #############################################################################################################################
-
-import requests
-import os
-import json
 from fpdf import FPDF
 from time import sleep
 from textoContrato import Texto
 from get_dados import Dados
 from datetime import date
+secret = open("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/secrets/secrets.txt", 'r')
+secret = list(secret)
+#variaveis
+
+path = secret[0]
+path = path.replace("\n", "")
+
 
 dados = Dados()
 texto = Texto()
@@ -30,7 +33,7 @@ nome = nome.replace(" ", "_").lower()
 
 
 pdf.multi_cell(180, 10,  txt = texto.formatacao, align = 'J')
-pdf.output(f"C:/Users/Bates/Documents/Repositorios/LIBS/myContract/pdf/contract_{nome}_{data}.pdf").encode('cp1252')
+pdf.output(f"{path}pdf/contract_{nome}_{data}.pdf").encode('cp1252')
 
 
 

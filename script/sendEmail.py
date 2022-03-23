@@ -1,3 +1,10 @@
+
+#############################################################################################################################
+#   filename: sendEmail.py                                                       
+#   created: 2022-03-14                                                              
+#   import your librarys below                                                    
+#############################################################################################################################
+
 import mimetypes
 import os
 import smtplib
@@ -11,6 +18,25 @@ from email.mime.text import MIMEText
 from datetime import date
 data_atual = date.today()
 data = data_atual.strftime('%Y%m%d')
+secret = open("C:/Users/Bates/Documents/Repositorios/LIBS/myContract/secrets/secrets.txt", 'r')
+secret = list(secret)
+#variaveis
+
+path = secret[0]
+path = path.replace("\n", "")
+pix = secret[1]
+banco = secret[2]
+favorecido = secret[3]
+nome_empresa = secret[4]
+end_empresa = secret[5]
+num_empresa = secret[6]
+cep_empresa = secret[7]
+bairro_empresa = secret[8]
+estado_empresa = secret[9]
+cnpj = secret[10]
+email_empresa = secret[11]
+senha_empresa = secret[12]
+
 
 dados = Dados()
 nomeFull = dados.nome.split()
@@ -49,7 +75,7 @@ def adiciona_anexo(msg, filename):
     mime.add_header('Content-Disposition', 'attachment', filename=filename)
     msg.attach(mime)
 
-de = '<email pessoal>'
+de = f'{email_empresa}'
 para = [f'{dados.email}']
 
 msg = MIMEMultipart()
@@ -71,17 +97,16 @@ msg.attach(MIMEText(f"""
 
 
 <p> <i> Att, </i> </p>
-<p> <i> <b> <assinatura> </i> </b> </p>
-</a href="https://wa.me/tel> tel </a>""", 'html', 'utf-8'))
+<p> <i> <b> {nome_empresa} </i> </b> </p>""", 'html', 'utf-8'))
 
 # Arquivos anexos.
-adiciona_anexo(msg, f'C:/Users/Bates/Documents/Repositorios/LIBS/myContract/pdf/contract_{nome}_{data}.pdf')
+adiciona_anexo(msg, f'{path}pdf/contract_{nome}_{data}.pdf')
 
 
 raw = msg.as_string()
 
 smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-smtp.login('emailprincipal', 'senha')
+smtp.login(f'{email_empresa}', f'{senha_empresa}')
 smtp.sendmail(de, para, raw)
 smtp.quit()
 
