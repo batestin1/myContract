@@ -6,6 +6,9 @@
 <h3> Resume </h3>
 <p> Este projeto trata-se de um gerador de contrato automatico para equipes de fotografia. Neste projeto, captamos os dados do contratante via google forms, e escrevemos o contrato que será salvo em um formato unico de pdf e enviado automaticamente por e-mail do contratante e da equipe contratada. Além disso, o arquivo também estará salvo em um banco de dados relacional. </p>
 
+<p> <i> OBS </i> </p>
+<p> Existe um arquivo dentro da pasta secrets que contem informações de segurança sobre a empresa contratada, como, cnpj, senha, chave pix, etc.. Você pode estar construindo esse arquivo em forma de lista, um item abaixo de outro. </p>
+
 >> <h3> Google Form </h3>
 ```
 https://forms.gle/qp9qb3RWULEWosCS6
