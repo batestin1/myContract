@@ -49,7 +49,7 @@ def adiciona_anexo(msg, filename):
     mime.add_header('Content-Disposition', 'attachment', filename=filename)
     msg.attach(mime)
 
-de = 'nacascastudio@mail.com'
+de = '<email pessoal>'
 para = [f'{dados.email}']
 
 msg = MIMEMultipart()
